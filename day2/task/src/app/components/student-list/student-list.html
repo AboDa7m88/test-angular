@@ -1,0 +1,7 @@
+@if (students.length === 0) {
+  <p class="text-muted">No Students Found</p>
+} @else {
+  @for (student of students; track student) {
+    <app-student-card [student]="student" (delete)="delete.emit(student)" />
+  }
+}

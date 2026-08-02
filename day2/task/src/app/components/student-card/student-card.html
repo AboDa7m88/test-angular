@@ -1,0 +1,25 @@
+<div class="card mb-3" [ngClass]="{ 'border-success': student.status === 'Passed', 'border-danger': student.status === 'Failed' }">
+  <div class="card-body">
+    <h5 class="card-title">{{ student.name }}</h5>
+    <span
+      class="badge mb-2"
+      [ngClass]="{ 'bg-success': student.status === 'Passed', 'bg-danger': student.status === 'Failed' }"
+    >
+      {{ student.status }}
+    </span>
+
+    @if (showDetails) {
+      <div class="mt-2">
+        <p class="card-text mb-1">Age: {{ student.age }}</p>
+        <p class="card-text mb-1">Grade: {{ student.grade }}</p>
+      </div>
+    }
+
+    <div class="mt-2 d-flex gap-2">
+      <button class="btn btn-sm btn-outline-secondary" (click)="toggleDetails()">
+        {{ showDetails ? 'Hide Details' : 'Show Details' }}
+      </button>
+      <button class="btn btn-sm btn-outline-danger" (click)="delete.emit()">Delete</button>
+    </div>
+  </div>
+</div>
