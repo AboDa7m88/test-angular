@@ -1,0 +1,27 @@
+@if (loading) {
+  <p class="text-muted">Loading...</p>
+} @else if (!post) {
+  <p class="text-muted">Post not found.</p>
+} @else {
+  <div class="card mb-4">
+    <div class="card-body">
+      <h3 class="card-title">{{ post.title }}</h3>
+      @if (author) {
+        <p class="text-muted mb-2">By {{ author.name }} ({{ author.email }})</p>
+      }
+      <p class="card-text">{{ post.body }}</p>
+    </div>
+  </div>
+
+  <h5 class="mb-3">Comments ({{ comments.length }})</h5>
+  @if (comments.length === 0) {
+    <p class="text-muted">No comments yet.</p>
+  } @else {
+    @for (comment of comments; track comment.id) {
+      <div class="border-bottom py-2">
+        <p class="mb-1"><strong>{{ comment.name }}</strong> <span class="text-muted">({{ comment.email }})</span></p>
+        <p class="mb-0 text-muted">{{ comment.body }}</p>
+      </div>
+    }
+  }
+}

@@ -1,0 +1,29 @@
+<form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+  <div class="mb-3">
+    <label class="form-label">Title</label>
+    <input
+      type="text"
+      formControlName="title"
+      class="form-control"
+      [class.is-invalid]="postForm.get('title')?.invalid && postForm.get('title')?.touched"
+    />
+    @if (postForm.get('title')?.invalid && postForm.get('title')?.touched) {
+      <div class="invalid-feedback">Title is required and must be at least 5 characters.</div>
+    }
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Body</label>
+    <textarea
+      formControlName="body"
+      class="form-control"
+      rows="4"
+      [class.is-invalid]="postForm.get('body')?.invalid && postForm.get('body')?.touched"
+    ></textarea>
+    @if (postForm.get('body')?.invalid && postForm.get('body')?.touched) {
+      <div class="invalid-feedback">Body is required and must be at least 20 characters.</div>
+    }
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="postForm.invalid">Add Post</button>
+</form>

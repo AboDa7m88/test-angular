@@ -1,0 +1,37 @@
+<h2 class="mb-1">Posts</h2>
+<p class="text-muted">Total: {{ totalPosts() }} posts | Showing: {{ filteredCount() }}</p>
+
+<div class="d-flex gap-2 mb-3 flex-wrap">
+  <input
+    type="text"
+    class="form-control"
+    style="max-width: 300px;"
+    placeholder="Search by title..."
+    [ngModel]="searchTerm()"
+    (ngModelChange)="onSearchChange($event)"
+  />
+
+  <select
+    class="form-select"
+    style="max-width: 220px;"
+    [ngModel]="selectedUserId()"
+    (ngModelChange)="onUserFilterChange($event)"
+  >
+    <option [ngValue]="null">All users</option>
+    @for (user of users; track user.id) {
+      <option [ngValue]="user.id">{{ user.name }}</option>
+    }
+  </select>
+</div>
+
+@if (loading) {
+  <p class="text-muted">Loading posts...</p>
+} @else if (filteredPosts().length === 0) {
+  <p class="text-muted">No Posts Found</p>
+} @else {
+  <div class="posts-grid" [class.loaded]="!loading">
+    @for (post of filteredPosts(); track post.id) {
+      <app-post-card [post]="post" (delete)="onDeletePost(post)" />
+    }
+  </div>
+}

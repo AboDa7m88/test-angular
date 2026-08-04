@@ -1,0 +1,13 @@
+<div class="card h-100" [ngClass]="{ 'border-warning': isLong }">
+  <div class="card-body d-flex flex-column">
+    <h5 class="card-title">{{ post.title }}</h5>
+    <p class="card-text flex-grow-1">{{ shortBody }}</p>
+    @if (isLong) {
+      <span class="badge bg-warning text-dark mb-2 align-self-start">Long post</span>
+    }
+    <div class="d-flex gap-2">
+      <button class="btn btn-sm btn-outline-primary" (click)="viewDetails()">View Details</button>
+      <button class="btn btn-sm btn-outline-danger" (click)="delete.emit()">Delete</button>
+    </div>
+  </div>
+</div>
